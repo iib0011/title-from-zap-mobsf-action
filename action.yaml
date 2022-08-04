@@ -13,6 +13,8 @@ inputs:
 outputs:
   title: # id of output
     description: 'The email title'
+  summary:
+   description: 'The email summary'
 runs:
   using: 'node16'
   main: 'index.js'

@@ -1,19 +1,24 @@
 const core = require('@actions/core');
 const fs = require("fs");
-const { getObservatoryTitle } = require('./observatory');
+const { getObservatoryTitle, getObservatorySummary } = require('./observatory');
 const {
-    getZapTitle
+    getZapTitle, getZapSummary
 } = require('./zap');
 
 try {
-    let zapRawData;
-    if (fs.existsSync(core.getInput("zap"))) {
-        zapRawData = fs.readFileSync(core.getInput("zap"));
-    }
-    const zap = zapRawData ? JSON.parse(zapRawData) : null;
-    const observatory = fs.readFileSync(core.getInput("observatory"),"utf-8")
-    core.setOutput('title',`${getZapTitle(zap)}${getObservatoryTitle(observatory)}`);
+    // let zapRawData;
+    // if (fs.existsSync(core.getInput("zap"))) {
+    //     zapRawData = fs.readFileSync(core.getInput("zap"));
+    // }
+    // const zap = zapRawData ? JSON.parse(zapRawData) : null;
+    // const observatory = fs.readFileSync(core.getInput("observatory"),"utf-8")
     
+    const zap = JSON.parse(fs.readFileSync("zap.json"));
+    const observatory = fs.readFileSync("obs.md","utf-8");
+
+    core.setOutput('title',`${getZapTitle(zap)}${getObservatoryTitle(observatory)}`);
+    // core.setOutput('summary', getZapSummary(zap))
+    console.log(`${getZapSummary(zap)}\n${getObservatorySummary(observatory)}`)
 } catch (error) {
     core.setFailed(error.message);
 }

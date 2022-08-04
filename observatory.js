@@ -4,6 +4,13 @@ const getObservatoryTitle = (observatory) => {
     const issuesCount = observatory.split("red_circle").length - 1;
     return `${obsHeader}(${issuesCount} ${issuesCount === 1?"Issue":"Issues"})`;
 }
+
+const getObservatorySummary = (observatory) => {
+    if(!observatory) return
+    const issues = observatory.split(":red_circle:")
+    return issues
+}
 module.exports = {
-    getObservatoryTitle
+    getObservatoryTitle,
+    getObservatorySummary
 }
