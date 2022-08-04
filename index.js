@@ -17,7 +17,7 @@ try {
     // const observatory = fs.readFileSync("obs.md","utf-8");
 
     core.setOutput('title',`${getZapTitle(zap)}${getObservatoryTitle(observatory)}`);
-    core.setOutput('summary',`${getZapSummary(zap)}\n\n${getObservatorySummary(observatory)}`)
+    core.setOutput('summary',`\n\n${getZapSummary(zap)}\n\n${getObservatorySummary(observatory)}`)
 
 
     // console.log(`${getZapTitle(zap)}${getObservatoryTitle(observatory)}`)
