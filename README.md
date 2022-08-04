@@ -14,6 +14,7 @@ This action returns the title from [zap](https://github.com/zaproxy/action-basel
 ## Outputs
 
 ## `title`
+## `summary`
 
 The excel report
 ## Example usage
