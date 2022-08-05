@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const fs = require("fs");
+const { getZapIssues, endCOnnection, getObservatoryIssues } = require('./db');
 const { getObservatoryTitle, getObservatorySummary } = require('./observatory');
 const {
     getZapTitle, getZapSummary
@@ -16,12 +17,17 @@ try {
     // const zap = JSON.parse(fs.readFileSync("zap.json"));
     // const observatory = fs.readFileSync("obs.md","utf-8");
 
-    core.setOutput('title',`${getZapTitle(zap)}${getObservatoryTitle(observatory)}`);
-    core.setOutput('summary',`\n\n${getZapSummary(zap)}\n\n${getObservatorySummary(observatory)}`)
-
-
-    // console.log(`${getZapTitle(zap)}${getObservatoryTitle(observatory)}`)
-    // console.log(`${getZapSummary(zap)}\n\n${getObservatorySummary(observatory)}`)
+    // core.setOutput('title',`${getZapTitle(zap)}${getObservatoryTitle(observatory)}`);
+    // core.setOutput('summary',`\n\n${getZapSummary(zap)}\n\n${getObservatorySummary(observatory)}`)
+    getZapIssues((zapIssues)=>{
+        getObservatoryIssues((observatoryIssues)=>{
+            core.setOutput(`${getZapTitle(zap)}${getObservatoryTitle(observatory)}`)
+            core.setOutput(`${getZapSummary(zap, zapIssues)}\n\n${getObservatorySummary(observatory, observatoryIssues)}`);
+            endCOnnection();
+        })
+    
+});
+    
 
     
 } catch (error) {

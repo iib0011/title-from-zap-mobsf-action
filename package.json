@@ -19,6 +19,7 @@
   "homepage": "https://github.com/iib0011/json2excel-action#readme",
   "dependencies": {
     "@actions/core": "^1.6.0",
-    "fs": "^0.0.1-security"
-    }
+    "fs": "^0.0.1-security",
+    "mysql": "^2.18.1"
+  }
 }

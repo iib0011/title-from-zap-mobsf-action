@@ -1,3 +1,4 @@
+const { createZapIssue } = require("./db");
 const { analyseZap } = require("./utils");
 const zapHeader = "[ZAP]";
 const high = "High";
@@ -15,7 +16,7 @@ const getZapTitle = (zap) => {
   checkAlerts(high);
   return result;
 };
-const getZapSummary = (zap) => {
+const getZapSummary = (zap, dbIssues) => {
   if (!zap) return;
   const [alerts, riskOccurences] = analyseZap(zap);
   let result;
@@ -24,7 +25,11 @@ const getZapSummary = (zap) => {
       result = alerts
         .filter((alert) => alert.risk === severity)
         .reduce((prev, curr, index) => {
-          return ` ${prev}\n${index + 1}) ${curr.name}`;
+          const issueInDB = dbIssues.includes(curr.name);
+          if(!issueInDB){
+            createZapIssue(curr.name)
+          }
+          return ` ${prev}\n${index + 1}) ${curr.name} ${issueInDB?"":"(NEW)"}`;
         }, `${zapHeader}\n\n${severity}\n`);
     }
   };
