@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   host: core.getInput("DB_HOST"),
   user: core.getInput("DB_USER"),
   password: core.getInput("DB_PWD"),
-  database: core.getInput("DB"),
+  database: core.getInput("DB_NAME"),
 });
 connection.connect();
 const observatoryTable = "observatory_issues";

@@ -10,6 +10,18 @@ inputs:
     description: 'Path to observatory md report'
     required: true
     default: 'Observatory_report.md'
+  DB_HOST:  # id of input
+    description: 'DB Host'
+    required: true
+  DB_USER:  # id of input
+    description: 'DB user'
+    required: true
+  DB_PWD:  # id of input
+    description: 'DB password'
+    required: true
+  DB_NAME:  # id of input
+    description: 'DB name'
+    required: true
 outputs:
   title: # id of output
     description: 'The email title'
